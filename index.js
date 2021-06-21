@@ -2,9 +2,20 @@
 const totalBoxes = 9
 const boxes = document.querySelectorAll(".square")
 console.log(boxes)
+for(const [i, box] of boxes.entries()){
+    box.addEventListener("click", e => {
+        const boxValue = e.target.innerHTML
+        console.log(e.target.innerHTML)
+        const boxPos = i
+        console.log(`this is boxPos::: ${boxPos}`)
+        isWinner(boxPos)
+    })
+}
+
+//console.log(newArray)
 let winner = false
 let player1 = true
-
+let gameOver = false
 async function isWinner(position){
     if(position === 0 || position === 8){
         let diagonal = await leftDiagonal(position)
@@ -55,7 +66,7 @@ async function isWinner(position){
         }
     }
 }
-isWinner(7)
+
 /* 
  checker is a function that takes 3 arguments: 
  1. current position clicked
