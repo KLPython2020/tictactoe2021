@@ -5,9 +5,66 @@ console.log(boxes)
 let winner = false
 let player1 = true
 
-function isWinner(position){
-    
+async function isWinner(position){
+    if(position === 0 || position === 8){
+        let diagonal = await leftDiagonal(position)
+        console.log(diagonal)
+        let across = await horizontal(position)
+        console.log(across)
+        let upDown = await vertical(position)
+        console.log(upDown)
+        if(diagonal || upDown || across){
+            console.log(`there is a winner!!!!!! ${boxes[position].innerHTML}`)
+        }
+    }
+    else if(position === 6 || position === 2){
+        let diagonal = await rightDiagonal(position)
+        console.log(diagonal)
+        let across = await horizontal(position)
+        console.log(across)
+        let upDown = await vertical(position)
+        console.log(upDown)
+        if(diagonal || upDown || across){
+            console.log(`there is a winner!!!!!! ${boxes[position].innerHTML}`)
+        }
+    }
+    else if(position === 4){
+        let diagonal = await leftDiagonal(position)
+        console.log(diagonal)
+        let rdiagonal = await rightDiagonal(position)
+        console.log(rdiagonal)
+        let across = await horizontal(position)
+        console.log(across)
+        let upDown = await vertical(position)
+        console.log(upDown)
+        if(diagonal || rdiagonal || upDown || across){
+            console.log(`there is a winner!!!!!! ${boxes[position].innerHTML}`)
+        }else{
+            console.log(`sorry no winner found`)
+        }
+    }
+    else if(position === 3 || position === 1 || position === 5 || position === 7){
+        let across = await horizontal(position)
+        console.log(across)
+        let upDown = await vertical(position)
+        console.log(upDown)
+        if(upDown || across){
+            console.log(`there is a winner!!!!!! ${boxes[position].innerHTML}`)
+        }else{
+            console.log(`sorry no winner found`)
+        }
+    }
 }
+isWinner(7)
+/* 
+ checker is a function that takes 3 arguments: 
+ 1. current position clicked
+ 2. distance from current position to compare
+ 3. flag to check both left and right or up and down
+ and it is used to check if there is 3 of the same "X" or "O"
+ in each direction that is valid to compare for the current box chosen.
+ If there is a set of 3, return true else return false
+ */
 function checker(pos, num, flag){
     console.log(`checker pos::::: ${pos}`)
     const player = boxes[pos].innerHTML
@@ -33,6 +90,11 @@ function checker(pos, num, flag){
     return counter === 2 ? true : false
     
 }
+/*
+ The following functions below are used to decide 
+ the distance away from the current box clicked.
+*/
+
 function horizontal(pos){
     console.log(pos)
     if(pos === 0 || pos === 1 || pos === 2){
@@ -57,7 +119,7 @@ function vertical(pos){
         return checker(pos, 1, true)
     }
 }
-function rdiagnal(pos){
+function rightDiagonal(pos){
     console.log(pos)
      if(pos === 2){
         return checker(pos, 2)
@@ -69,7 +131,7 @@ function rdiagnal(pos){
         return checker(pos, 2, true)
     }
 }
-function ldiagnal(pos){
+function leftDiagonal(pos){
     console.log(pos)
      if(pos === 0){
         return checker(pos, 4)
@@ -81,4 +143,4 @@ function ldiagnal(pos){
         return checker(pos, 4, true)
     }
 }
-console.log(ldiagnal(4))
+//console.log(ldiagnal(4))
