@@ -17,47 +17,51 @@ let winner = false
 let player1 = true
 let gameOver = false
 async function isWinner(position){
+    let upDown = null
+    let across = null
+    let lDiagonal = null
+    let rDiagonal = null
     if(position === 0 || position === 8){
-        let diagonal = await leftDiagonal(position)
-        console.log(diagonal)
-        let across = await horizontal(position)
+        lDiagonal = await leftDiagonal(position)
+        console.log(lDiagonal)
+        across = await horizontal(position)
         console.log(across)
-        let upDown = await vertical(position)
+        upDown = await vertical(position)
         console.log(upDown)
-        if(diagonal || upDown || across){
+        if(lDiagonal || upDown || across){
             console.log(`there is a winner!!!!!! ${boxes[position].innerHTML}`)
         }
     }
     else if(position === 6 || position === 2){
-        let diagonal = await rightDiagonal(position)
+        rDiagonal = await rightDiagonal(position)
         console.log(diagonal)
-        let across = await horizontal(position)
+        across = await horizontal(position)
         console.log(across)
-        let upDown = await vertical(position)
+        upDown = await vertical(position)
         console.log(upDown)
-        if(diagonal || upDown || across){
+        if(rDiagonal || upDown || across){
             console.log(`there is a winner!!!!!! ${boxes[position].innerHTML}`)
         }
     }
     else if(position === 4){
-        let diagonal = await leftDiagonal(position)
-        console.log(diagonal)
-        let rdiagonal = await rightDiagonal(position)
-        console.log(rdiagonal)
-        let across = await horizontal(position)
+        lDiagonal = await leftDiagonal(position)
+        console.log(lDiagonal)
+        rDiagonal = await rightDiagonal(position)
+        console.log(rDiagonal)
+        across = await horizontal(position)
         console.log(across)
-        let upDown = await vertical(position)
+        upDown = await vertical(position)
         console.log(upDown)
-        if(diagonal || rdiagonal || upDown || across){
+        if(lDiagonal || rDiagonal || upDown || across){
             console.log(`there is a winner!!!!!! ${boxes[position].innerHTML}`)
         }else{
             console.log(`sorry no winner found`)
         }
     }
     else if(position === 3 || position === 1 || position === 5 || position === 7){
-        let across = await horizontal(position)
+        across = await horizontal(position)
         console.log(across)
-        let upDown = await vertical(position)
+        upDown = await vertical(position)
         console.log(upDown)
         if(upDown || across){
             console.log(`there is a winner!!!!!! ${boxes[position].innerHTML}`)
